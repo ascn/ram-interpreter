@@ -1,0 +1,66 @@
+RAM Program Syntax
+
+First 4 lines:
+k \d+
+n \d+
+p \d+
+i input strings
+
+k indicates the number of characters in the alphabet (assuming a=1, b=2, etc.). n indicates the number of input registers. These registers will be numbered beginning from R1. p indicates the total number of registers. i is followed by n input strings, placed in the corresponding register (first string goes to register 1, etc.).
+
+Opcode syntax:
+
+The first argument of a line is either N\d, where \d is the line number, or 100 if the instruction has no line number.
+
+add:
+N\d 100 add c Ra
+
+concatenates the cth character to the right of the value in register A
+Ex: 100 0 add 1 3
+Assume 3 contained "ccc" before the instruction was executed. Afterwards, it will contain "ccca".
+
+tail:
+N\d 100 tail 100 Ra
+
+removes the left most letter of the value in register A
+Ex: 100 100 tail 100 4
+Assume R4 contained "acc" before the instruction was executed. Afterwards, it will contain "cc".
+
+clr:
+N\d 100 clr 100 Ra
+
+empties the register A
+Ex: 100 100 clr 100 4
+Assume R4 contained "acc" before the instruction was executed. Afterwards, it will not contain a value.
+
+assign:
+N\d Ra assign 100 Rb
+
+sets the value in register A to the value of register B
+Ex: 100 3 assign 100 1
+The value in register 3 is now equal to the value in register 1
+
+gotoa:
+N\d 100 gotoa 100 Na
+
+jumps to the closest instruction above with line number A
+
+gotob:
+N\d 100 gotob 100 Na
+
+jumps to the closest instruction below with line number A
+
+jmpa:
+N\d Ra jmpa c Nb
+
+jumps to the closest instruction above with line number B if the left most character in register A is c
+
+jmpb:
+N\d Ra jmpb c Nb
+
+jumps to the closest instruction below with line number B if the left most character in register A is c
+
+continue:
+100 100 continue 100 100
+
+signifies the end of the RAM program where the value of the computed function is in register 1

@@ -1,0 +1,25 @@
+k 2
+n 1
+p 3
+i abbaab
+100 2 assign 100 1
+100 3 assign 100 1
+N0 2 jmpb 1 N1
+100 2 jmpb 2 N2
+100 100 gotob 100 N3
+N1 100 add 1 1
+100 100 tail 100 2
+100 100 gotoa 100 N0
+N2 100 add 2 1
+100 100 tail 100 2
+100 100 gotoa 100 N0
+N3 3 jmpb 1 N4
+100 3 jmpb 2 N5
+100 100 gotob 100 N6
+N4 100 add 1 1
+100 100 tail 100 3
+100 100 gotoa 100 N3
+N5 100 add 2 1
+100 100 tail 100 3
+100 100 gotoa 100 N3
+N6 100 continue 100 100
